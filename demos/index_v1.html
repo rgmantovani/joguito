@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Joguito - DEMO</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    var config = {
+        type: Phaser.AUTO,
+
+        // resolução e sistema de colisão.
+        width: 800,
+        height: 600,
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 300 },
+                debug: false
+            }
+        },
+
+        // tratamento dos gráficos: pixelado
+        render: {
+          antialiasGL: false,
+          pixelArt: true,
+        },
+
+        // funções da classe scene:
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    var player;
+    var platforms;
+    var cursors;
+    var game = new Phaser.Game(config);
+
+    // função para carregamento de assets
+    function preload ()
+    {
+        console.log('loading Assets');
+        // this.load.image('sky', 'assets/sky.png');
+        // this.load.image('ground', 'assets/platform.png');
+        // this.load.image('star', 'assets/star.png');
+        // this.load.image('bomb', 'assets/bomb.png');
+        // console.log('load tile sheet');
+        // this.load.image('tiles', 'assets/maps/dungeon-16-16.png');
+        this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        // console.log('load map');
+        // this.load.tilemapTiledJSON('themap', 'assets/maps/phaser_intro_map.json');
+    }
+
+    function create ()
+    {
+        // this.add.image(400, 300, 'sky');
+
+        platforms = this.physics.add.staticGroup();
+
+        // platforms.create(400, 568, 'ground').setScale(20).refreshBody();
+
+        // platforms.create(600, 400, 'ground');
+        // platforms.create(50, 250, 'ground');
+        // platforms.create(750, 220, 'ground');
+
+        player = this.physics.add.sprite(100, 450, 'dude');
+
+        player.setBounce(0.2);
+        player.setCollideWorldBounds(true);
+
+        this.anims.create({
+            key: 'left',
+            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'turn',
+            frames: [ { key: 'dude', frame: 4 } ],
+            frameRate: 20
+        });
+
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        cursors = this.input.keyboard.createCursorKeys();
+        // this.physics.add.collider(player, ground);
+    }
+
+    function update ()
+    {
+
+      // velocidade horizontal
+      if (cursors.left.isDown) {
+          console.log("left")
+          player.setVelocityX(-210);
+          player.anims.play('left', true);
+      }
+      else if (cursors.right.isDown) {
+          console.log("right")
+          player.setVelocityX(-210);
+          player.anims.play('right', true);
+      }
+      else{
+          // repouso
+          player.setVelocityX(0);
+      }
+
+      // velocidade vertical
+      if (cursors.up.isDown) {
+          console.log("up")
+          player.setVelocityY(-210);
+      }
+      else if (cursors.down.isDown) {
+          console.log("down")
+          player.setVelocityY(210);
+      }
+      else{
+          //repouso
+          king.setVelocityY(0);
+      }
+    }
+
+</script>
+
+</body>
+</html>
