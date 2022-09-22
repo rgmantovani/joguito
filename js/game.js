@@ -1,4 +1,5 @@
 // -------------------------------------------------
+// An initial scene just to load assets
 // -------------------------------------------------
 
 var BootScene = new Phaser.Class({
@@ -22,7 +23,6 @@ var BootScene = new Phaser.Class({
 
         // our two characters
         this.load.spritesheet('player', 'assets/RPG_assets.png', { frameWidth: 16, frameHeight: 16 });
-        // this.load.spritesheet('player', 'assets/newguy.png', { frameWidth: 16, frameHeight: 16 });
 
         // load audio -  some browsers don't support mp3 files, so they use ogg
         this.load.audio('backgroundSong', ["assets/audio/OMC_How_Bizarre.mp3",
@@ -127,35 +127,41 @@ var WorldScene = new Phaser.Class({
         // don't walk on trees
         this.physics.add.collider(this.player, obstacles);
 
-        // limit camera to map
+        //-------------------------------
+        // Limit camera to map
+        //-------------------------------
+
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(this.player);
         this.cameras.main.roundPixels = true; // avoid tile bleed
+
+        //-------------------------------
+        //-------------------------------
 
         // user input
         this.cursors = this.input.keyboard.createCursorKeys();
 
         // where the enemies will be
-        this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-        for(var i = 0; i < 30; i++) {
-            var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-            var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-            // parameters are x, y, width, height
-            this.spawns.create(x, y, 20, 20);
-        }
-        // add collider
-        this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+    //     this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
+    //     for(var i = 0; i < 30; i++) {
+    //         var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+    //         var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+    //         // parameters are x, y, width, height
+    //         this.spawns.create(x, y, 20, 20);
+    //     }
+    //     // add collider
+    //     this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
     },
-    onMeetEnemy: function(player, zone) {
-        // we move the zone to some other location
-        zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-        zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-
-        // shake the world
-        this.cameras.main.shake(300);
-
-        // start battle
-    },
+    // onMeetEnemy: function(player, zone) {
+    //     // we move the zone to some other location
+    //     zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+    //     zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+    //
+    //     // shake the world
+    //     this.cameras.main.shake(300);
+    //
+    //     // start battle
+    // },
     update: function (time, delta)
     {
     //    this.controls.update(delta);
