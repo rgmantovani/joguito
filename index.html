@@ -1,147 +1,20 @@
-<!doctype html>
-<!-- HTML Padrão -->
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Joguito - DEMO</title>
-  <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
-  <style type="text/css">
-  body {
-    margin: 0;
-  }
-  </style>
-</head>
-<body>
-
-  <!-- código javascript -->
-  <script type="text/javascript">
-
-  // Configuração do jogo
-  var config = {
-    type: Phaser.AUTO,
-
-    // resolução e sistema de colisão.
-    width: 800,
-    height: 600,
-    physics: {
-      default: 'arcade',
-      arcade: {
-        debug: true,
-      },
-    },
-
-    // tratamento dos gráficos: pixelado
-    render: {
-      antialiasGL: false,
-      pixelArt: true,
-    },
-
-    // funções da classe scene:
-    scene: {
-      preload: preload,
-      create: create,
-      update: update
-    }
-  };
-
-  // variáveis globais - jogo e jogador
-  console.log('start*');
-  var player;
-  var cursors;
-  var game = new Phaser.Game(config);
-
-  // função para carregamento de assets
-  function preload ()
-  {
-    console.log('load spritesheet');
-    this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-
-    console.log('load tile sheet');
-    this.load.image('tiles', 'assets/maps/dungeon-16-16.png');
-    console.log('load map');
-    this.load.tilemapTiledJSON('themap', 'assets/maps/phaser_intro_map.json');
-  }
-
-  // função para criação dos elementos
-  function create ()
-  {
-    // criação do mapa e ligação com a imagem (tilesheet)
-    this.map = this.make.tilemap({ key: 'themap', tileWidth: 16, tileHeight: 16 });
-    this.tileset = this.map.addTilesetImage('intro_tileSet', 'tiles');
-
-    // criação das camadas
-    this.groundLayer = this.map.createDynamicLayer('ground', this.tileset, 0, 0);
-    this.wallsLayer = this.map.createDynamicLayer('walls', this.tileset, 0, 0);
-
-    // criação do rei
-    // player = this.physics.add.sprite(100, 300, 'dude', 5);
-    player = this.physics.add.sprite(100, 300, 'dude');
-    player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
-
-    // criação da colisão (com paredes)
-    this.wallsLayer.setCollisionBetween(30, 40, true)
-    this.physics.add.collider(player, this.wallsLayer);
-
-    this.anims.create({
-        key: 'left',
-        frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-        frameRate: 10,
-        repeat: -1
-    });
-
-    this.anims.create({
-        key: 'turn',
-        frames: [ { key: 'dude', frame: 4 } ],
-        frameRate: 20
-    });
-
-    this.anims.create({
-        key: 'right',
-        frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-        frameRate: 10,
-        repeat: -1
-    });
-
-    cursors = this.input.keyboard.createCursorKeys();
-  }
-
-
-  function update ()
-  {
-
-    // velocidade horizontal
-    if (cursors.left.isDown) {
-      console.log("left")
-      player.setVelocityX(-210);
-      player.anims.play('left', true);
-    }
-    else if (cursors.right.isDown) {
-      console.log("right")
-      player.setVelocityX(210);
-      player.anims.play('right', true);
-    }
-    else{
-      // repouso
-      player.setVelocityX(0);
-    }
-
-    // velocidade vertical
-    if (cursors.up.isDown) {
-      console.log("up")
-      player.setVelocityY(-210);
-    }
-    else if (cursors.down.isDown) {
-      console.log("down")
-      player.setVelocityY(210);
-    }
-    else{
-      //repouso
-      player.setVelocityY(0);
-    }
-  }
-
-</script>
-
-</body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Joguito - Demo</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+        <script src="js/phaser.js"></script>
+        <script src="js/game.js"></script>
+        <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    </head>
+    <body>
+        <div id="content" style="display: block; width: 100%; text-align: center"></div>
+    </body>
 </html>
