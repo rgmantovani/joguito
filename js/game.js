@@ -1,4 +1,5 @@
-
+// -------------------------------------------------
+// -------------------------------------------------
 
 var BootScene = new Phaser.Class({
 
@@ -23,6 +24,9 @@ var BootScene = new Phaser.Class({
         this.load.spritesheet('player', 'assets/RPG_assets.png', { frameWidth: 16, frameHeight: 16 });
         // this.load.spritesheet('player', 'assets/newguy.png', { frameWidth: 16, frameHeight: 16 });
 
+        // load audio -  some browsers don't support mp3 files, so they use ogg
+        this.load.audio('backgroundSong', ["assets/audio/OMC_How_Bizarre.mp3",
+            "assets/audio/OMC_How_Bizarre.ogg"]);
     },
 
     create: function ()
@@ -31,6 +35,10 @@ var BootScene = new Phaser.Class({
         this.scene.start('WorldScene');
     }
 });
+
+// -------------------------------------------------
+// Scene: Open World
+// -------------------------------------------------
 
 var WorldScene = new Phaser.Class({
 
@@ -59,6 +67,23 @@ var WorldScene = new Phaser.Class({
         // creating the layers
         var grass = map.createStaticLayer('Grass', tiles, 0, 0);
         var obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
+
+        // -------------------------------
+        // adding background music
+        // -------------------------------
+        this.music = this.sound.add('backgroundSong');
+        var musicConfig = {
+          mute: false,
+          volume: 1,
+          rate: 1,
+          detune: 0,
+          seek:0,
+          loop: true,
+          delay: 0
+        }
+        this.music.play(musicConfig); // start playing music
+        // -------------------------------
+        // -------------------------------
 
         // make all tiles in obstacles collidable
         obstacles.setCollisionByExclusion([-1]);
@@ -134,7 +159,6 @@ var WorldScene = new Phaser.Class({
     update: function (time, delta)
     {
     //    this.controls.update(delta);
-
         this.player.body.setVelocity(0);
 
         // Horizontal movement
@@ -184,6 +208,10 @@ var WorldScene = new Phaser.Class({
 
 });
 
+// -------------------------------------------------
+// -------------------------------------------------
+
+
 var config = {
     type: Phaser.AUTO,
     parent: 'content',
@@ -204,3 +232,6 @@ var config = {
     ]
 };
 var game = new Phaser.Game(config);
+
+// -------------------------------------------------
+// -------------------------------------------------
