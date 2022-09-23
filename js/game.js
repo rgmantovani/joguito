@@ -22,7 +22,8 @@ var BootScene = new Phaser.Class({
         this.load.tilemapTiledJSON('map', 'assets/map/map.json');
 
         // our two characters
-        this.load.spritesheet('player', 'assets/RPG_assets.png', { frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('player', 'assets/RPG_assets.png', {frameWidth:16, frameHeight:16});
+        this.load.spritesheet('npcs', 'assets/RPG_assets.png', { frameWidth:16, frameHeight:16});
 
         // load audio -  some browsers don't support mp3 files, so they use ogg
         this.load.audio('backgroundSong', ["assets/audio/OMC_How_Bizarre.mp3",
@@ -127,6 +128,31 @@ var WorldScene = new Phaser.Class({
         // don't walk on trees
         this.physics.add.collider(this.player, obstacles);
 
+
+        //-------------------------------
+        // Adding some NPCs
+        //-------------------------------
+
+        // NPC animation
+        this.anims.create({
+            key: 'walkingMode',
+            frames: this.anims.generateFrameNumbers('npcs', { frames: [ 21, 27, 21, 33] }),
+            frameRate: 5,
+            repeat: -1
+        });
+
+        // where the NPCs will be placed
+        //  setImmovable prevents the npc to be pushed
+        // TODO: use array to control NPCs of the same type
+        this.npc1 = this.physics.add.sprite(100, 100, 'npcs', 27).setImmovable();
+        this.npc2 = this.physics.add.sprite(330, 200, 'npcs', 21).setImmovable();
+        this.npc3 = this.physics.add.sprite(180, 300, 'npcs', 21).setImmovable();
+
+        // dont walk on npcs
+        this.physics.add.collider(this.player, this.npc1);
+        this.physics.add.collider(this.player, this.npc2);
+        this.physics.add.collider(this.player, this.npc3);
+
         //-------------------------------
         // Limit camera to map
         //-------------------------------
@@ -136,6 +162,7 @@ var WorldScene = new Phaser.Class({
         this.cameras.main.roundPixels = true; // avoid tile bleed
 
         //-------------------------------
+        // Controlling player with the keyboard
         //-------------------------------
 
         // user input
@@ -150,7 +177,9 @@ var WorldScene = new Phaser.Class({
     //         this.spawns.create(x, y, 20, 20);
     //     }
     //     // add collider
-    //     this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+        // this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+        // don't collide with npcs
+        // this.physics.add.collider(this.player, this.npc1);
     },
     // onMeetEnemy: function(player, zone) {
     //     // we move the zone to some other location
@@ -187,7 +216,8 @@ var WorldScene = new Phaser.Class({
             this.player.body.setVelocityY(80);
         }
 
-        // Update the animation last and give left/right animations precedence over up/down animations
+        // Update the animation last and give left/right animations
+        // precedence over up/down animations
         if (this.cursors.left.isDown)
         {
             this.player.anims.play('left', true);
@@ -210,13 +240,17 @@ var WorldScene = new Phaser.Class({
         {
             this.player.anims.stop();
         }
-    }
 
+        // making the NPCs to move
+        this.npc1.anims.play('walkingMode', true);
+        this.npc2.anims.play('walkingMode', true);
+        this.npc3.anims.play('walkingMode', true);
+
+    }
 });
 
 // -------------------------------------------------
 // -------------------------------------------------
-
 
 var config = {
     type: Phaser.AUTO,
@@ -232,9 +266,10 @@ var config = {
             debug: true // set to true to view zones
         }
     },
+    // all the possible scenes
     scene: [
-        BootScene,
-        WorldScene
+        BootScene,      // just load the asses and call the main scene
+        WorldScene      // the main scene, exploring the map
     ]
 };
 var game = new Phaser.Game(config);
