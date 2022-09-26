@@ -160,6 +160,12 @@ var WorldScene = new Phaser.Class({
     this.npc3 = this.physics.add.sprite(180, 300, 'npcs', 21).setImmovable();
 
     // dont walk on npcs
+    // this.npcsGroup = game.add.group();
+    // this.npcsGroup.add(this.npc1);
+    // this.npcsGroup.add(this.npc2);
+    // this.npcsGroup.add(this.npc3);
+    // this.game.physics.arcade.collide(this.player, this.npcsGroup);
+
     this.physics.add.collider(this.player, this.npc1);
     this.physics.add.collider(this.player, this.npc2);
     this.physics.add.collider(this.player, this.npc3);
@@ -187,22 +193,24 @@ var WorldScene = new Phaser.Class({
     this.door = this.physics.add.sprite(9, 150, 'door',0);
     this.door.setImmovable();
     // this.physics.add.collider(this.player, this.door);
-    this.physics.add.overlap(this.player, this.door, this.callNewScene, false, this);
+    // this.physics.add.overlap(this.player, this.door, this.callNewScene, false, this);
+    this.physics.add.collider(this.player, this.door, this.callNewScene, false, this);
   },
 
   callNewScene: function() {
     console.log(' - Starting the Second Scene');
-    this.cameras.main.shake(150);
+    // this.cameras.main.shake(150);
+    // this.music.stop("backgroundSong");
+    this.sound.removeByKey('backgroundSong');
     // calling the second scene
-    setTimeout(() => {
+    // setTimeout(() => {
       this.scene.start('SecondScene')
-    }, 150)
+    // }, 150)
   },
 
   update: function (time, delta)
   {
     // updatePlayer();
-    //    this.controls.update(delta);
     this.player.body.setVelocity(0);
 
     // Horizontal movement
@@ -292,20 +300,6 @@ var SecondScene = new Phaser.Class({
       var obstacles = map.createLayer('Obstacles', tiles, 0, 0);
 
       // -------------------------------
-      // adding background music
-      // -------------------------------
-      this.music = this.sound.add('backgroundSong');
-      var musicConfig = {
-        mute: false,
-        volume: 1,
-        rate: 1,
-        detune: 0,
-        seek:0,
-        loop: true,
-        delay: 0
-      }
-      this.music.play(musicConfig); // start playing music
-      // -------------------------------
       // -------------------------------
 
       // make all tiles in obstacles collidable
@@ -344,17 +338,17 @@ var SecondScene = new Phaser.Class({
       // this door makes the game go to a scene 2
       this.door = this.physics.add.sprite(150, 150, 'door',0);
       this.door.setImmovable();
-      // this.physics.add.collider(this.player, this.door);
-      this.physics.add.overlap(this.player, this.door, this.callNewScene, false, this);
+      // this.physics.add.overlap(this.player, this.door, this.callNewScene, false, this);
+      this.physics.add.collider(this.player, this.door, this.callNewScene, false, this);
     },
 
     callNewScene: function() {
       console.log(' - Starting the World Scene');
-      this.cameras.main.shake(150);
+      // this.cameras.main.shake(150);
       // calling the first scene
-      setTimeout(() => {
+      // setTimeout(() => {
         this.scene.start('WorldScene')
-      }, 150)
+      // }, 150)
     },
 
     update: function (time, delta)
