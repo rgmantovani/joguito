@@ -192,9 +192,11 @@ var WorldScene = new Phaser.Class({
 
   callNewScene: function() {
     console.log(' - Starting the Second Scene');
-    // this.cameras.main.shake(300);
+    this.cameras.main.shake(150);
     // calling the second scene
-    this.scene.start("SecondScene");
+    setTimeout(() => {
+      this.scene.start('SecondScene')
+    }, 150)
   },
 
   update: function (time, delta)
@@ -348,8 +350,11 @@ var SecondScene = new Phaser.Class({
 
     callNewScene: function() {
       console.log(' - Starting the World Scene');
+      this.cameras.main.shake(150);
       // calling the first scene
-      this.scene.start('WorldScene');
+      setTimeout(() => {
+        this.scene.start('WorldScene')
+      }, 150)
     },
 
     update: function (time, delta)
