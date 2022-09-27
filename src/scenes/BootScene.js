@@ -20,6 +20,7 @@ var BootScene = new Phaser.Class({
 
     // map in json format
     this.load.tilemapTiledJSON('map', 'assets/map/map.json');
+    this.load.tilemapTiledJSON('map2', 'assets/map/map2.json');
 
     // our two characters
     this.load.spritesheet('player', 'assets/RPG_assets.png', {frameWidth:16, frameHeight:16});
