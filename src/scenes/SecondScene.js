@@ -18,6 +18,7 @@ var SecondScene = new Phaser.Class({
 
     create: function ()
     {
+
       // create the map
       var map = this.make.tilemap({ key: 'map' });
 

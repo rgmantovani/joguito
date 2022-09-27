@@ -64,12 +64,14 @@ var WorldScene = new Phaser.Class({
       frameRate: 10,
       repeat: -1
     });
+
     this.anims.create({
       key: 'up',
       frames: this.anims.generateFrameNumbers('player', { frames: [2, 8, 2, 14]}),
       frameRate: 10,
       repeat: -1
     });
+
     this.anims.create({
       key: 'down',
       frames: this.anims.generateFrameNumbers('player', { frames: [ 0, 6, 0, 12 ] }),
@@ -101,19 +103,13 @@ var WorldScene = new Phaser.Class({
     });
 
     // where the NPCs will be placed
-    //  setImmovable prevents the npc to be pushed
+    // setImmovable prevents the npc to be pushed
     // TODO: use array to control NPCs of the same type
     this.npc1 = this.physics.add.sprite(100, 100, 'npcs', 27).setImmovable();
     this.npc2 = this.physics.add.sprite(330, 200, 'npcs', 21).setImmovable();
     this.npc3 = this.physics.add.sprite(180, 300, 'npcs', 21).setImmovable();
 
     // dont walk on npcs
-    // this.npcsGroup = game.add.group();
-    // this.npcsGroup.add(this.npc1);
-    // this.npcsGroup.add(this.npc2);
-    // this.npcsGroup.add(this.npc3);
-    // this.game.physics.arcade.collide(this.player, this.npcsGroup);
-
     this.physics.add.collider(this.player, this.npc1);
     this.physics.add.collider(this.player, this.npc2);
     this.physics.add.collider(this.player, this.npc3);
