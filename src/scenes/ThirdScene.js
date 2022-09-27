@@ -1,14 +1,14 @@
 // -------------------------------------------------
-// Second Scene
+// Third Scene
 // -------------------------------------------------
 
-var SecondScene = new Phaser.Class({
+var ThirdScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
-    initialize: function SecondScene ()
+    initialize: function ThirdScene ()
     {
-        Phaser.Scene.call(this, { key: 'SecondScene' });
+        Phaser.Scene.call(this, { key: 'ThirdScene' });
     },
 
     preload: function ()
@@ -20,7 +20,7 @@ var SecondScene = new Phaser.Class({
     {
 
       // create the map
-      var map = this.make.tilemap({ key: 'map2' });
+      var map = this.make.tilemap({ key: 'map3' });
 
       // first parameter is the name of the tilemap in tiled
       var tiles = map.addTilesetImage('spritesheet', 'tiles');
@@ -36,7 +36,7 @@ var SecondScene = new Phaser.Class({
       trees.setCollisionByExclusion([-1]);
 
       // our player sprite created through the phycis system
-      this.player = this.physics.add.sprite(134, 150, 'player', 2);
+      this.player = this.physics.add.sprite(75, 55, 'player', 2);
 
       // don't go out of the map
       this.physics.world.bounds.width = map.widthInPixels;
@@ -65,17 +65,15 @@ var SecondScene = new Phaser.Class({
       // Adding a door to a new scene
       //-------------------------------
 
-      // this door makes the game go to a scene 2
-      this.door = this.physics.add.sprite(134, 150, 'door', 0);
+      // this door makes the game go to a scene 1
+      this.door = this.physics.add.sprite(75, 55, 'door', 0);
       this.door.setImmovable();
       this.physics.add.overlap(this.player, this.door, this.callWorldScene, false, this);
-      // this.physics.add.collider(this.player, this.door, this.callWorldScene, false, this);
     },
 
     callWorldScene: function() {
       if(this.cursors.space.isDown) {
         console.log(' - Starting the World Scene');
-          // this.scene.start('WorldScene');
           this.scene.switch('WorldScene');
       }
     },
@@ -138,7 +136,7 @@ var SecondScene = new Phaser.Class({
 });
 
 // exporting variable, this way it is accessed out of this file
-export default SecondScene;
+export default ThirdScene;
 
 
 // -------------------------------------------------

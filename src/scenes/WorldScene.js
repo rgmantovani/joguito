@@ -125,8 +125,6 @@ var WorldScene = new Phaser.Class({
     //-------------------------------
     // Controlling player with the keyboard
     //-------------------------------
-
-    // user input
     this.cursors = this.input.keyboard.createCursorKeys();
 
     //-------------------------------
@@ -134,17 +132,31 @@ var WorldScene = new Phaser.Class({
     //-------------------------------
 
     // this door makes the game go to a scene 2
-    this.door = this.physics.add.sprite(9, 150, 'door',0);
+    this.door = this.physics.add.sprite(9, 150, 'door', 0);
     this.door.setImmovable();
     this.physics.add.overlap(this.player, this.door, this.callSecondScene, false, this);
-    // this.physics.add.collider(this.player, this.door, this.callSecondScene, false, this);
+
+    // this door makes the game go to a scene 3
+    this.door2 = this.physics.add.sprite(300, 150, 'door2',0);
+    this.door2.setImmovable();
+    this.physics.add.overlap(this.player, this.door2, this.callThirdScene, false, this);
   },
 
+  // TODO: there must be some way to pass parameters/objects to generalize
+  // these functions
   callSecondScene: function() {
     if(this.cursors.space.isDown) {
       console.log(' - Starting the Second Scene');
       // this.music.stop("backgroundSong");
         this.scene.switch('SecondScene');
+    }
+  },
+
+  callThirdScene: function() {
+    if(this.cursors.space.isDown) {
+      console.log(' - Starting the Third Scene');
+      // this.music.stop("backgroundSong");
+        this.scene.switch('ThirdScene');
     }
   },
 
