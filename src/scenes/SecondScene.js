@@ -6,9 +6,7 @@ var SecondScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
-    initialize:
-
-    function SecondScene ()
+    initialize: function SecondScene ()
     {
         Phaser.Scene.call(this, { key: 'SecondScene' });
     },
@@ -69,22 +67,26 @@ var SecondScene = new Phaser.Class({
       // this door makes the game go to a scene 2
       this.door = this.physics.add.sprite(150, 150, 'door',0);
       this.door.setImmovable();
-      // this.physics.add.overlap(this.player, this.door, this.callNewScene, false, this);
-      this.physics.add.collider(this.player, this.door, this.callNewScene, false, this);
+      // this.physics.add.overlap(this.player, this.door, this.callWorldScene, false, this);
+      this.physics.add.collider(this.player, this.door, this.callWorldScene, false, this);
     },
 
-    callNewScene: function() {
-      console.log(' - Starting the World Scene');
-      // this.cameras.main.shake(150);
-      // calling the first scene
-      // setTimeout(() => {
-        this.scene.start('WorldScene')
-      // }, 150)
+    callWorldScene: function() {
+      if(this.cursors.space.isDown) {
+        console.log(' - Starting the World Scene');
+          this.scene.start('WorldScene');
+      }
     },
 
     update: function (time, delta)
     {
       this.player.body.setVelocity(0);
+      this.updatePlayer();
+    },
+
+    // this function updates the player's position
+    updatePlayer: function()
+    {
       // Horizontal movement
       if (this.cursors.left.isDown)
       {
@@ -130,6 +132,7 @@ var SecondScene = new Phaser.Class({
         this.player.anims.stop();
       }
     },
+
 });
 
 // exporting variable, this way it is accessed out of this file

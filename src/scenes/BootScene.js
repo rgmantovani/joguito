@@ -6,9 +6,7 @@ var BootScene = new Phaser.Class({
 
   Extends: Phaser.Scene,
 
-  initialize:
-
-  function BootScene ()
+  initialize: function BootScene ()
   {
     Phaser.Scene.call(this, { key: 'BootScene' });
   },

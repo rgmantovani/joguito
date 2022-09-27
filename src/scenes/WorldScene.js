@@ -6,9 +6,7 @@ var WorldScene = new Phaser.Class({
 
   Extends: Phaser.Scene,
 
-  initialize:
-
-  function WorldScene ()
+  initialize: function WorldScene ()
   {
     console.log(' - WorldScene: constructor');
     Phaser.Scene.call(this, { key: 'WorldScene' });
@@ -143,26 +141,40 @@ var WorldScene = new Phaser.Class({
     this.door = this.physics.add.sprite(9, 150, 'door',0);
     this.door.setImmovable();
     // this.physics.add.collider(this.player, this.door);
-    // this.physics.add.overlap(this.player, this.door, this.callNewScene, false, this);
-    this.physics.add.collider(this.player, this.door, this.callNewScene, false, this);
+    // this.physics.add.overlap(this.player, this.door, this.callSecondScene, false, this);
+    this.physics.add.collider(this.player, this.door, this.callSecondScene, false, this);
   },
 
-  callNewScene: function() {
-    console.log(' - Starting the Second Scene');
-    // this.cameras.main.shake(150);
-    // this.music.stop("backgroundSong");
-    this.sound.removeByKey('backgroundSong');
-    // calling the second scene
-    // setTimeout(() => {
-      this.scene.start('SecondScene')
-    // }, 150)
+  callSecondScene: function() {
+    if(this.cursors.space.isDown) {
+      console.log(' - Starting the Second Scene');
+      // this.cameras.main.shake(150);
+      // this.music.stop("backgroundSong");
+      this.sound.removeByKey('backgroundSong');
+      // calling the second scene
+      // setTimeout(() => {
+        this.scene.start('SecondScene')
+      // }, 150)
+    }
   },
 
   update: function (time, delta)
   {
-    // updatePlayer();
     this.player.body.setVelocity(0);
+    this.updatePlayer();
+    this.updateNPCs();
+  },
 
+  updateNPCs: function()
+  {
+    this.npc1.anims.play('walkingMode', true);
+    this.npc2.anims.play('walkingMode', true);
+    this.npc3.anims.play('walkingMode', true);
+  },
+
+  // this function updates the player's position
+  updatePlayer: function()
+  {
     // Horizontal movement
     if (this.cursors.left.isDown)
     {
@@ -207,11 +219,6 @@ var WorldScene = new Phaser.Class({
     {
       this.player.anims.stop();
     }
-
-    // updateNPCs();
-    this.npc1.anims.play('walkingMode', true);
-    this.npc2.anims.play('walkingMode', true);
-    this.npc3.anims.play('walkingMode', true);
   },
 });
 
