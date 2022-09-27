@@ -4,6 +4,7 @@
 import BootScene from './scenes/BootScene.js'
 import WorldScene from './scenes/WorldScene.js'
 import SecondScene from './scenes/SecondScene.js'
+import ThirdScene from './scenes/ThirdScene.js'
 
 // -------------------------------------------------
 // -------------------------------------------------
@@ -26,7 +27,8 @@ var config = {
   scene: [
     BootScene,      // just load the asses and call the main scene
     WorldScene,     // the main scene, exploring the map
-    SecondScene     // a second scene to make a transition
+    SecondScene,    // a second scene to make a transition
+    ThirdScene,     // a second scene to make a transition  
   ]
 };
 var game = new Phaser.Game(config);

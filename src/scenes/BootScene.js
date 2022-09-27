@@ -21,6 +21,7 @@ var BootScene = new Phaser.Class({
     // map in json format
     this.load.tilemapTiledJSON('map', 'assets/map/map.json');
     this.load.tilemapTiledJSON('map2', 'assets/map/map2.json');
+    this.load.tilemapTiledJSON('map3', 'assets/map/map3.json');
 
     // our two characters
     this.load.spritesheet('player', 'assets/RPG_assets.png', {frameWidth:16, frameHeight:16});
@@ -28,6 +29,7 @@ var BootScene = new Phaser.Class({
 
     // tiles for a door
     this.load.spritesheet('door', 'assets/door_assets.png', {frameWidth:16, frameHeight:16});
+    this.load.spritesheet('door2', 'assets/door_assets.png', {frameWidth:16, frameHeight:16});
 
     // load audio -  some browsers don't support mp3 files, so they use ogg
     this.load.audio('backgroundSong', ["assets/audio/OMC_How_Bizarre.mp3",
