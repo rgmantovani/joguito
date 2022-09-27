@@ -20,23 +20,23 @@ var SecondScene = new Phaser.Class({
     {
 
       // create the map
-      var map = this.make.tilemap({ key: 'map' });
+      var map = this.make.tilemap({ key: 'map2' });
 
       // first parameter is the name of the tilemap in tiled
       var tiles = map.addTilesetImage('spritesheet', 'tiles');
 
       // creating the layers
-      var grass = map.createLayer('Grass', tiles, 0, 0);
-      var obstacles = map.createLayer('Obstacles', tiles, 0, 0);
+      var grass = map.createLayer('Field', tiles, 0, 0);
+      var trees = map.createLayer('Trees', tiles, 0, 0);
 
       // -------------------------------
       // -------------------------------
 
       // make all tiles in obstacles collidable
-      obstacles.setCollisionByExclusion([-1]);
+      trees.setCollisionByExclusion([-1]);
 
       // our player sprite created through the phycis system
-      this.player = this.physics.add.sprite(150, 150, 'player', 2);
+      this.player = this.physics.add.sprite(134, 150, 'player', 2);
 
       // don't go out of the map
       this.physics.world.bounds.width = map.widthInPixels;
@@ -44,7 +44,7 @@ var SecondScene = new Phaser.Class({
       this.player.setCollideWorldBounds(true);
 
       // don't walk on trees
-      this.physics.add.collider(this.player, obstacles);
+      this.physics.add.collider(this.player, trees);
 
       //-------------------------------
       // Limit camera to map
@@ -66,7 +66,7 @@ var SecondScene = new Phaser.Class({
       //-------------------------------
 
       // this door makes the game go to a scene 2
-      this.door = this.physics.add.sprite(150, 150, 'door', 0);
+      this.door = this.physics.add.sprite(134, 150, 'door', 0);
       this.door.setImmovable();
       this.physics.add.overlap(this.player, this.door, this.callWorldScene, false, this);
       // this.physics.add.collider(this.player, this.door, this.callWorldScene, false, this);
