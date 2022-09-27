@@ -140,21 +140,15 @@ var WorldScene = new Phaser.Class({
     // this door makes the game go to a scene 2
     this.door = this.physics.add.sprite(9, 150, 'door',0);
     this.door.setImmovable();
-    // this.physics.add.collider(this.player, this.door);
-    // this.physics.add.overlap(this.player, this.door, this.callSecondScene, false, this);
-    this.physics.add.collider(this.player, this.door, this.callSecondScene, false, this);
+    this.physics.add.overlap(this.player, this.door, this.callSecondScene, false, this);
+    // this.physics.add.collider(this.player, this.door, this.callSecondScene, false, this);
   },
 
   callSecondScene: function() {
     if(this.cursors.space.isDown) {
       console.log(' - Starting the Second Scene');
-      // this.cameras.main.shake(150);
       // this.music.stop("backgroundSong");
-      this.sound.removeByKey('backgroundSong');
-      // calling the second scene
-      // setTimeout(() => {
-        this.scene.start('SecondScene')
-      // }, 150)
+        this.scene.switch('SecondScene');
     }
   },
 
