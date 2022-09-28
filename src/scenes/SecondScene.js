@@ -35,8 +35,20 @@ var SecondScene = new Phaser.Class({
       // make all tiles in obstacles collidable
       trees.setCollisionByExclusion([-1]);
 
+      //-------------------------------
+      // Adding a door to a new scene
+      //-------------------------------
+
+      // this door makes the game go to a scene 2
+      this.door = this.physics.add.sprite(134, 150, 'door', 0);
+      this.door.setImmovable();
+
+      //-------------------------------
+      // Adding the main char
+      //-------------------------------
+
       // our player sprite created through the phycis system
-      this.player = this.physics.add.sprite(134, 150, 'player', 2);
+      this.player = this.physics.add.sprite(134, 150, 'player', 0);
 
       // don't go out of the map
       this.physics.world.bounds.width = map.widthInPixels;
@@ -62,14 +74,10 @@ var SecondScene = new Phaser.Class({
       this.cursors = this.input.keyboard.createCursorKeys();
 
       //-------------------------------
-      // Adding a door to a new scene
+      // Changing Scenes
       //-------------------------------
-
-      // this door makes the game go to a scene 2
-      this.door = this.physics.add.sprite(134, 150, 'door', 0);
-      this.door.setImmovable();
       this.physics.add.overlap(this.player, this.door, this.callWorldScene, false, this);
-      // this.physics.add.collider(this.player, this.door, this.callWorldScene, false, this);
+
     },
 
     callWorldScene: function() {

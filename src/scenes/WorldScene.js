@@ -79,8 +79,21 @@ var WorldScene = new Phaser.Class({
       repeat: -1
     });
 
+    //-------------------------------
+    // Adding a door to a new scene
+    //-------------------------------
+
+    this.door = this.physics.add.sprite(9, 150, 'door', 0);
+    this.door.setImmovable();
+    this.door2 = this.physics.add.sprite(300, 150, 'door2', 0);
+    this.door2.setImmovable();
+
+    //-------------------------------
+    // Adding the main char
+    //-------------------------------
+
     // our player sprite created through the phycis system
-    this.player = this.physics.add.sprite(50, 100, 'player', 2);
+    this.player = this.physics.add.sprite(50, 100, 'player', 0);
 
     // don't go out of the map
     this.physics.world.bounds.width = map.widthInPixels;
@@ -128,17 +141,12 @@ var WorldScene = new Phaser.Class({
     this.cursors = this.input.keyboard.createCursorKeys();
 
     //-------------------------------
-    // Adding a door to a new scene
+    // changing Scenes
     //-------------------------------
 
     // this door makes the game go to a scene 2
-    this.door = this.physics.add.sprite(9, 150, 'door', 0);
-    this.door.setImmovable();
     this.physics.add.overlap(this.player, this.door, this.callSecondScene, false, this);
-
     // this door makes the game go to a scene 3
-    this.door2 = this.physics.add.sprite(300, 150, 'door2',0);
-    this.door2.setImmovable();
     this.physics.add.overlap(this.player, this.door2, this.callThirdScene, false, this);
   },
 
