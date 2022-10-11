@@ -20,14 +20,14 @@ var WorldScene = new Phaser.Class({
   create: function ()
   {
     // create the map
-    var map = this.make.tilemap({ key: 'map' });
+    var map = this.make.tilemap({ key: 'utfmap' });
 
     // first parameter is the name of the tilemap in tiled
-    var tiles = map.addTilesetImage('spritesheet', 'tiles');
+    var tiles = map.addTilesetImage('reduced', 'reduced');
 
     // creating the layers
     var grass = map.createLayer('Grass', tiles, 0, 0);
-    var obstacles = map.createLayer('Obstacles', tiles, 0, 0);
+    var obstacles = map.createLayer('Buildings', tiles, 0, 0);
 
     // -------------------------------
     // adding background music
@@ -52,7 +52,7 @@ var WorldScene = new Phaser.Class({
     //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13]}),
+      frames: this.anims.generateFrameNumbers('player', { frames: [3, 4, 5, 4]}),
       frameRate: 10,
       repeat: -1
     });
@@ -60,21 +60,21 @@ var WorldScene = new Phaser.Class({
     // animation with key 'right'
     this.anims.create({
       key: 'right',
-      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [6, 7, 8, 7] }),
       frameRate: 10,
       repeat: -1
     });
 
     this.anims.create({
       key: 'up',
-      frames: this.anims.generateFrameNumbers('player', { frames: [2, 8, 2, 14]}),
+      frames: this.anims.generateFrameNumbers('player', { frames: [9, 10, 11, 10]}),
       frameRate: 10,
       repeat: -1
     });
 
     this.anims.create({
       key: 'down',
-      frames: this.anims.generateFrameNumbers('player', { frames: [ 0, 6, 0, 12 ] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [ 0, 1, 2, 1 ] }),
       frameRate: 10,
       repeat: -1
     });
@@ -188,21 +188,21 @@ var WorldScene = new Phaser.Class({
     // Horizontal movement
     if (this.cursors.left.isDown)
     {
-      this.player.body.setVelocityX(-80);
+      this.player.body.setVelocityX(-160);
     }
     else if (this.cursors.right.isDown)
     {
-      this.player.body.setVelocityX(80);
+      this.player.body.setVelocityX(160);
     }
 
     // Vertical movement
     if (this.cursors.up.isDown)
     {
-      this.player.body.setVelocityY(-80);
+      this.player.body.setVelocityY(-160);
     }
     else if (this.cursors.down.isDown)
     {
-      this.player.body.setVelocityY(80);
+      this.player.body.setVelocityY(160);
     }
 
     // Update the animation last and give left/right animations
@@ -210,7 +210,7 @@ var WorldScene = new Phaser.Class({
     if (this.cursors.left.isDown)
     {
       this.player.anims.play('left', true);
-      this.player.flipX = true;
+      this.player.flipX = false;
     }
     else if (this.cursors.right.isDown)
     {
