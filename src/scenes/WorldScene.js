@@ -49,6 +49,11 @@ var WorldScene = new Phaser.Class({
     // make all tiles in obstacles collidable
     obstacles.setCollisionByExclusion([-1]);
 
+    this.input.keyboard.on('keyup-ESC', () => {
+      this.scene.pause();
+      this.scene.launch('PauseMenu', { backScene: 'WorldScene' });
+    }, this);
+
     //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
     this.anims.create({
       key: 'left',
