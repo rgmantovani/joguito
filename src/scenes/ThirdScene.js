@@ -78,6 +78,8 @@ var ThirdScene = new Phaser.Class({
 
       // this door makes the game go to a scene 1
       this.physics.add.overlap(this.player, this.door, this.callWorldScene, false, this);
+
+      this.add.image(20, 20, 'menu',).setInteractive().on('pointerdown', () => this.scene.switch('MenuOp'));
     },
 
     callWorldScene: function() {

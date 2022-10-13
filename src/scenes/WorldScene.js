@@ -6,19 +6,16 @@ var WorldScene = new Phaser.Class({
 
   Extends: Phaser.Scene,
 
-  initialize: function WorldScene ()
-  {
+  initialize: function WorldScene() {
     console.log(' - WorldScene: constructor');
     Phaser.Scene.call(this, { key: 'WorldScene' });
   },
 
-  preload: function ()
-  {
+  preload: function () {
 
   },
 
-  create: function ()
-  {
+  create: function () {
     // create the map
     var map = this.make.tilemap({ key: 'map' });
 
@@ -38,7 +35,7 @@ var WorldScene = new Phaser.Class({
       volume: 1,
       rate: 1,
       detune: 0,
-      seek:0,
+      seek: 0,
       loop: true,
       delay: 0
     }
@@ -52,7 +49,7 @@ var WorldScene = new Phaser.Class({
     //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13]}),
+      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13] }),
       frameRate: 10,
       repeat: -1
     });
@@ -67,14 +64,14 @@ var WorldScene = new Phaser.Class({
 
     this.anims.create({
       key: 'up',
-      frames: this.anims.generateFrameNumbers('player', { frames: [2, 8, 2, 14]}),
+      frames: this.anims.generateFrameNumbers('player', { frames: [2, 8, 2, 14] }),
       frameRate: 10,
       repeat: -1
     });
 
     this.anims.create({
       key: 'down',
-      frames: this.anims.generateFrameNumbers('player', { frames: [ 0, 6, 0, 12 ] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [0, 6, 0, 12] }),
       frameRate: 10,
       repeat: -1
     });
@@ -110,7 +107,7 @@ var WorldScene = new Phaser.Class({
     // NPC animation
     this.anims.create({
       key: 'walkingMode',
-      frames: this.anims.generateFrameNumbers('npcs', { frames: [ 21, 27, 21, 33] }),
+      frames: this.anims.generateFrameNumbers('npcs', { frames: [21, 27, 21, 33] }),
       frameRate: 5,
       repeat: -1
     });
@@ -148,85 +145,86 @@ var WorldScene = new Phaser.Class({
     this.physics.add.overlap(this.player, this.door, this.callSecondScene, false, this);
     // this door makes the game go to a scene 3
     this.physics.add.overlap(this.player, this.door2, this.callThirdScene, false, this);
+
+    //this.input.keyboard.on('keydown_ENTER', () => this.scene.start('MenuOp'));
+    this.add.image(20, 20, 'menu',).setInteractive().on('pointerdown', () => this.scene.switch('MenuOp'));
   },
 
   // TODO: there must be some way to pass parameters/objects to generalize
   // these functions
-  callSecondScene: function() {
+
+  //função para alterar menu com botão ainda não deu certo
+  /*callMenuOp: function() {
     if(this.cursors.space.isDown) {
+      console.log(' - Starting the Menu');
+      // this.music.stop("backgroundSong");
+        this.scene.switch('MenuOp');
+    }
+  },
+  */
+  callSecondScene: function () {
+    if (this.cursors.space.isDown) {
       console.log(' - Starting the Second Scene');
       // this.music.stop("backgroundSong");
-        this.scene.switch('SecondScene');
+      this.scene.switch('SecondScene');
     }
   },
 
-  callThirdScene: function() {
-    if(this.cursors.space.isDown) {
+  callThirdScene: function () {
+    if (this.cursors.space.isDown) {
       console.log(' - Starting the Third Scene');
       // this.music.stop("backgroundSong");
-        this.scene.switch('ThirdScene');
+      this.scene.switch('ThirdScene');
     }
   },
 
-  update: function (time, delta)
-  {
+  update: function (time, delta) {
     this.player.body.setVelocity(0);
     this.updatePlayer();
     this.updateNPCs();
   },
 
-  updateNPCs: function()
-  {
+  updateNPCs: function () {
     this.npc1.anims.play('walkingMode', true);
     this.npc2.anims.play('walkingMode', true);
     this.npc3.anims.play('walkingMode', true);
   },
 
   // this function updates the player's position
-  updatePlayer: function()
-  {
+  updatePlayer: function () {
     // Horizontal movement
-    if (this.cursors.left.isDown)
-    {
+    if (this.cursors.left.isDown) {
       this.player.body.setVelocityX(-80);
     }
-    else if (this.cursors.right.isDown)
-    {
+    else if (this.cursors.right.isDown) {
       this.player.body.setVelocityX(80);
     }
 
     // Vertical movement
-    if (this.cursors.up.isDown)
-    {
+    if (this.cursors.up.isDown) {
       this.player.body.setVelocityY(-80);
     }
-    else if (this.cursors.down.isDown)
-    {
+    else if (this.cursors.down.isDown) {
       this.player.body.setVelocityY(80);
     }
 
     // Update the animation last and give left/right animations
     // precedence over up/down animations
-    if (this.cursors.left.isDown)
-    {
+    if (this.cursors.left.isDown) {
       this.player.anims.play('left', true);
       this.player.flipX = true;
     }
-    else if (this.cursors.right.isDown)
-    {
+    else if (this.cursors.right.isDown) {
       this.player.anims.play('right', true);
       this.player.flipX = false;
     }
-    else if (this.cursors.up.isDown)
-    {
+    else if (this.cursors.up.isDown) {
       this.player.anims.play('up', true);
     }
-    else if (this.cursors.down.isDown)
-    {
+    else if (this.cursors.down.isDown) {
       this.player.anims.play('down', true);
     }
-    else
-    {
+    else {
       this.player.anims.stop();
     }
   },

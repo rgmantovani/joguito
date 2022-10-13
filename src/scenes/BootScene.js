@@ -31,6 +31,10 @@ var BootScene = new Phaser.Class({
     this.load.spritesheet('door', 'assets/door_assets.png', {frameWidth:16, frameHeight:16});
     this.load.spritesheet('door2', 'assets/door_assets.png', {frameWidth:16, frameHeight:16});
 
+    //image for menu
+    this.load.image('menu', 'assets/menu_list.png');
+    this.load.image('voltar', 'assets/return.png' );
+
     // load audio -  some browsers don't support mp3 files, so they use ogg
     this.load.audio('backgroundSong', ["assets/audio/OMC_How_Bizarre.mp3",
     "assets/audio/OMC_How_Bizarre.ogg"]);
@@ -40,7 +44,7 @@ var BootScene = new Phaser.Class({
   {
     // start the WorldScene
     console.log(' - Starting Wolrd Scene');
-    this.scene.start('WorldScene');
+    this.scene.start('Begin');
   }
 });
 
