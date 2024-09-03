@@ -16,11 +16,11 @@ var BootScene = new Phaser.Class({
     console.log(' - BootScene: loading assets');
 
     // map tiles
-    // this.load.image('tiles', 'assets/map/spritesheet.png');
     this.load.image('reduced', 'assets/map/reduced.png');
 
-    // map in json format
+    // map(s) in json format
     this.load.tilemapTiledJSON('utfmap', 'assets/map/utfmap.json');
+    this.load.tilemapTiledJSON('blocoA', 'assets/map/blocoA.json');
    
     // our two characters
     this.load.spritesheet('player', 'assets/student.png', {frameWidth:32, frameHeight:32});

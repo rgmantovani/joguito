@@ -26,8 +26,11 @@ var WorldScene = new Phaser.Class({
     var tiles = map.addTilesetImage('reduced', 'reduced');
 
     // creating the layers
-    var grass = map.createLayer('Grass', tiles, 0, 0);
-    var obstacles = map.createLayer('Buildings', tiles, 0, 0);
+    var grassMainMap = map.createLayer('Grass', tiles, 0, 0);
+    var obstaclesMainMap = map.createLayer('Buildings', tiles, 0, 0);
+
+    // make all tiles in obstacles collidable
+    obstaclesMainMap.setCollisionByExclusion([-1]);
 
     // -------------------------------
     // adding background music
@@ -44,13 +47,11 @@ var WorldScene = new Phaser.Class({
     }
     // start playing music
     this.music.play(musicConfig); 
-    
+
     // -------------------------------
     // -------------------------------
 
-    // make all tiles in obstacles collidable
-    obstacles.setCollisionByExclusion([-1]);
-
+   
     //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
     this.anims.create({
       key: 'left',
@@ -93,8 +94,16 @@ var WorldScene = new Phaser.Class({
     this.physics.world.bounds.height = map.heightInPixels;
     this.player.setCollideWorldBounds(true);
 
-    // don't walk on trees
-    this.physics.add.collider(this.player, obstacles);
+    // don't walk on obstacles
+    this.physics.add.collider(this.player, obstaclesMainMap);
+
+    //-------------------------------
+    // Adding the main char
+    //-------------------------------
+
+    // Adding door
+    this.door = this.physics.add.sprite(240, 205, '', 0);
+    this.door.setImmovable();
 
     //-------------------------------
     // Adding some NPCs
@@ -111,9 +120,9 @@ var WorldScene = new Phaser.Class({
     // where the NPCs will be placed
     // setImmovable prevents the npc to be pushed
     // TODO: use array to control NPCs of the same type
-    this.npc1 = this.physics.add.sprite(100, 100, 'npcs', 27).setImmovable();
-    this.npc2 = this.physics.add.sprite(330, 200, 'npcs', 21).setImmovable();
-    this.npc3 = this.physics.add.sprite(180, 300, 'npcs', 21).setImmovable();
+    this.npc1 = this.physics.add.sprite(100, 100, 'npcs', 0).setImmovable();
+    this.npc2 = this.physics.add.sprite(330, 200, 'npcs', 0).setImmovable();
+    this.npc3 = this.physics.add.sprite(180, 300, 'npcs', 0).setImmovable();
 
     // dont walk on npcs
     this.physics.add.collider(this.player, this.npc1);
@@ -138,26 +147,18 @@ var WorldScene = new Phaser.Class({
     //-------------------------------
 
     // this door makes the game go to a scene 2
-    this.physics.add.overlap(this.player, this.door, this.callSecondScene, false, this);
+    this.physics.add.overlap(this.player, this.door, this.callBlocoASecene, false, this);
     // this door makes the game go to a scene 3
-    this.physics.add.overlap(this.player, this.door2, this.callThirdScene, false, this);
+    // this.physics.add.overlap(this.player, this.door2, this.callThirdScene, false, this);
   },
 
   // TODO: there must be some way to pass parameters/objects to generalize
   // these functions
-  callSecondScene: function() {
+  callBlocoASecene: function() {
     if(this.cursors.space.isDown) {
-      console.log(' - Starting the Second Scene');
+      console.log(' - Starting the BlocoA Scene');
       // this.music.stop("backgroundSong");
-        this.scene.switch('SecondScene');
-    }
-  },
-
-  callThirdScene: function() {
-    if(this.cursors.space.isDown) {
-      console.log(' - Starting the Third Scene');
-      // this.music.stop("backgroundSong");
-        this.scene.switch('ThirdScene');
+        this.scene.switch('BlocoAScene');
     }
   },
 
