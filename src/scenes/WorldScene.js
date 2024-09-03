@@ -42,7 +42,9 @@ var WorldScene = new Phaser.Class({
       loop: true,
       delay: 0
     }
-    this.music.play(musicConfig); // start playing music
+    // start playing music
+    this.music.play(musicConfig); 
+    
     // -------------------------------
     // -------------------------------
 
@@ -80,15 +82,6 @@ var WorldScene = new Phaser.Class({
     });
 
     //-------------------------------
-    // Adding a door to a new scene
-    //-------------------------------
-
-    // this.door = this.physics.add.sprite(9, 150, 'door', 0);
-    // this.door.setImmovable();
-    // this.door2 = this.physics.add.sprite(300, 150, 'door2', 0);
-    // this.door2.setImmovable();
-
-    //-------------------------------
     // Adding the main char
     //-------------------------------
 
@@ -110,7 +103,7 @@ var WorldScene = new Phaser.Class({
     // NPC animation
     this.anims.create({
       key: 'walkingMode',
-      frames: this.anims.generateFrameNumbers('npcs', { frames: [ 21, 27, 21, 33] }),
+      frames: this.anims.generateFrameNumbers('npcs', { frames: [ 0, 1, 2, 1] }),
       frameRate: 5,
       repeat: -1
     });
