@@ -83,10 +83,10 @@ var WorldScene = new Phaser.Class({
     // Adding a door to a new scene
     //-------------------------------
 
-    this.door = this.physics.add.sprite(9, 150, 'door', 0);
-    this.door.setImmovable();
-    this.door2 = this.physics.add.sprite(300, 150, 'door2', 0);
-    this.door2.setImmovable();
+    // this.door = this.physics.add.sprite(9, 150, 'door', 0);
+    // this.door.setImmovable();
+    // this.door2 = this.physics.add.sprite(300, 150, 'door2', 0);
+    // this.door2.setImmovable();
 
     //-------------------------------
     // Adding the main char

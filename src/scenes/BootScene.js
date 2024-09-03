@@ -31,8 +31,8 @@ var BootScene = new Phaser.Class({
     this.load.spritesheet('npcs', 'assets/RPG_assets.png', {frameWidth:32, frameHeight:32});
 
     // tiles for a door
-    this.load.spritesheet('door', 'assets/door_assets.png', {frameWidth:32, frameHeight:32});
-    this.load.spritesheet('door2', 'assets/door_assets.png', {frameWidth:32, frameHeight:32});
+    // this.load.spritesheet('door', 'assets/door_assets.png', {frameWidth:32, frameHeight:32});
+    // this.load.spritesheet('door2', 'assets/door_assets.png', {frameWidth:32, frameHeight:32});
 
     // load audio -  some browsers don't support mp3 files, so they use ogg
     this.load.audio('backgroundSong', ["assets/audio/OMC_How_Bizarre.mp3",
