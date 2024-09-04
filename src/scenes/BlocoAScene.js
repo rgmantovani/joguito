@@ -1,14 +1,14 @@
 // -------------------------------------------------
-// Third Scene
+// BlocoA Scene
 // -------------------------------------------------
 
-var ThirdScene = new Phaser.Class({
+var BlocoAScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
-    initialize: function ThirdScene ()
+    initialize: function SecondScene ()
     {
-        Phaser.Scene.call(this, { key: 'ThirdScene' });
+        Phaser.Scene.call(this, { key: 'BlocoAScene' });
     },
 
     preload: function ()
@@ -20,42 +20,41 @@ var ThirdScene = new Phaser.Class({
     {
 
       // create the map
-      var map = this.make.tilemap({ key: 'map3' });
+      var map = this.make.tilemap({ key: 'blocoA' });
 
       // first parameter is the name of the tilemap in tiled
-      var tiles = map.addTilesetImage('spritesheet', 'tiles');
+      var tiles = map.addTilesetImage('reduced', 'reduced');
 
       // creating the layers
-      var grass = map.createLayer('Field', tiles, 0, 0);
-      var trees = map.createLayer('Trees', tiles, 0, 0);
-
-      // -------------------------------
-      // -------------------------------
-
-      // make all tiles in obstacles collidable
-      trees.setCollisionByExclusion([-1]);
+      var floorsA = map.createLayer('Floor', tiles, 0, 0);
+      var wallsA  = map.createLayer('Walls', tiles, 0, 0);
+      var doorsA  = map.createLayer('Doors', tiles, 0, 0);
 
       //-------------------------------
       // Adding a door to a new scene
       //-------------------------------
 
-      this.door = this.physics.add.sprite(75, 55, 'door', 0);
-      this.door.setImmovable();
+      // this door makes the game go to a main scene
+        this.doorMain = this.physics.add.sprite(470, 650, '', 0);
+        this.doorMain.setImmovable();
+
+      //   this.door.setImmovable();
 
       //-------------------------------
       // Adding the main char
       //-------------------------------
 
       // our player sprite created through the phycis system
-      this.player = this.physics.add.sprite(75, 55, 'player', 0);
+      this.player = this.physics.add.sprite(470, 650, 'player', 0);
 
       // don't go out of the map
       this.physics.world.bounds.width = map.widthInPixels;
       this.physics.world.bounds.height = map.heightInPixels;
       this.player.setCollideWorldBounds(true);
 
-      // don't walk on trees
-      this.physics.add.collider(this.player, trees);
+      // don't walk on walls
+      wallsA.setCollisionByExclusion([-1]);
+      this.physics.add.collider(this.player, wallsA);
 
       //-------------------------------
       // Limit camera to map
@@ -63,8 +62,9 @@ var ThirdScene = new Phaser.Class({
 
       this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
       this.cameras.main.startFollow(this.player);
-      this.cameras.main.roundPixels = true; // avoid tile bleed
-
+      // avoid tile bleed
+      this.cameras.main.roundPixels = true; 
+      
       //-------------------------------
       // Controlling player with the keyboard
       //-------------------------------
@@ -75,15 +75,14 @@ var ThirdScene = new Phaser.Class({
       //-------------------------------
       // Changing Scenes
       //-------------------------------
+      this.physics.add.overlap(this.player, this.doorMain, this.callWorldScene, false, this);
 
-      // this door makes the game go to a scene 1
-      this.physics.add.overlap(this.player, this.door, this.callWorldScene, false, this);
     },
 
     callWorldScene: function() {
       if(this.cursors.space.isDown) {
         console.log(' - Starting the World Scene');
-          this.scene.switch('WorldScene');
+        this.scene.switch('WorldScene');
       }
     },
 
@@ -96,57 +95,55 @@ var ThirdScene = new Phaser.Class({
     // this function updates the player's position
     updatePlayer: function()
     {
-      // Horizontal movement
-      if (this.cursors.left.isDown)
-      {
-        this.player.body.setVelocityX(-80);
-      }
-      else if (this.cursors.right.isDown)
-      {
-        this.player.body.setVelocityX(80);
-      }
+        // Horizontal movement
+        if (this.cursors.left.isDown)
+        {
+        this.player.body.setVelocityX(-160);
+        }
+        else if (this.cursors.right.isDown)
+        {
+        this.player.body.setVelocityX(160);
+        }
 
-      // Vertical movement
-      if (this.cursors.up.isDown)
-      {
-        this.player.body.setVelocityY(-80);
-      }
-      else if (this.cursors.down.isDown)
-      {
-        this.player.body.setVelocityY(80);
-      }
+        // Vertical movement
+        if (this.cursors.up.isDown)
+        {
+        this.player.body.setVelocityY(-160);
+        }
+        else if (this.cursors.down.isDown)
+        {
+        this.player.body.setVelocityY(160);
+        }
 
-      // Update the animation last and give left/right animations
-      // precedence over up/down animations
-      if (this.cursors.left.isDown)
-      {
+        // Update the animation last and give left/right animations
+        // precedence over up/down animations
+        if (this.cursors.left.isDown)
+        {
         this.player.anims.play('left', true);
-        this.player.flipX = true;
-      }
-      else if (this.cursors.right.isDown)
-      {
+        this.player.flipX = false;
+        }
+        else if (this.cursors.right.isDown)
+        {
         this.player.anims.play('right', true);
         this.player.flipX = false;
-      }
-      else if (this.cursors.up.isDown)
-      {
+        }
+        else if (this.cursors.up.isDown)
+        {
         this.player.anims.play('up', true);
-      }
-      else if (this.cursors.down.isDown)
-      {
+        }
+        else if (this.cursors.down.isDown)
+        {
         this.player.anims.play('down', true);
-      }
-      else
-      {
+        }
+        else
+        {
         this.player.anims.stop();
-      }
+        }
     },
-
 });
 
 // exporting variable, this way it is accessed out of this file
-export default ThirdScene;
-
+export default BlocoAScene;
 
 // -------------------------------------------------
 // -------------------------------------------------
