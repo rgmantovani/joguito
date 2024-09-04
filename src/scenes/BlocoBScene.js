@@ -1,14 +1,14 @@
 // -------------------------------------------------
-// BlocoA Scene
+// BlocoB Scene
 // -------------------------------------------------
 
-var BlocoAScene = new Phaser.Class({
+var BlocoBScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
-    initialize: function SecondScene ()
+    initialize: function BlocoBScene ()
     {
-        Phaser.Scene.call(this, { key: 'BlocoAScene' });
+        Phaser.Scene.call(this, { key: 'BlocoBScene' });
     },
 
     preload: function ()
@@ -20,16 +20,18 @@ var BlocoAScene = new Phaser.Class({
     {
 
       // create the map
-      var map = this.make.tilemap({ key: 'blocoA' });
+      // TODO: change here
+      var map = this.make.tilemap({ key: 'blocoB' });
 
       // first parameter is the name of the tilemap in tiled
       var tiles = map.addTilesetImage('reduced', 'reduced');
 
       // creating the layers
-      var floorsA = map.createLayer('Floor', tiles, 0, 0);
-      var wallsA  = map.createLayer('Walls', tiles, 0, 0);
-      var doorsA  = map.createLayer('Doors', tiles, 0, 0);
+      var floorB  = map.createLayer('Floor', tiles, 0, 0);
+      var wallsB  = map.createLayer('Walls', tiles, 0, 0);
+      var doorsB  = map.createLayer('Doors', tiles, 0, 0);
 
+      
       //-------------------------------
       // Adding a door to a new scene
       //-------------------------------
@@ -37,8 +39,6 @@ var BlocoAScene = new Phaser.Class({
       // this door makes the game go to a main scene
         this.doorMain = this.physics.add.sprite(470, 650, '', 0);
         this.doorMain.setImmovable();
-
-      //   this.door.setImmovable();
 
       //-------------------------------
       // Adding the main char
@@ -48,13 +48,13 @@ var BlocoAScene = new Phaser.Class({
       this.player = this.physics.add.sprite(470, 650, 'player', 0);
 
       // don't go out of the map
-      this.physics.world.bounds.width = map.widthInPixels;
+      this.physics.world.bounds.width  = map.widthInPixels;
       this.physics.world.bounds.height = map.heightInPixels;
       this.player.setCollideWorldBounds(true);
 
       // don't walk on walls
-      wallsA.setCollisionByExclusion([-1]);
-      this.physics.add.collider(this.player, wallsA);
+      wallsB.setCollisionByExclusion([-1]);
+      this.physics.add.collider(this.player, wallsB);
 
       //-------------------------------
       // Limit camera to map
@@ -98,52 +98,52 @@ var BlocoAScene = new Phaser.Class({
         // Horizontal movement
         if (this.cursors.left.isDown)
         {
-          this.player.body.setVelocityX(-160);
+            this.player.body.setVelocityX(-160);
         }
         else if (this.cursors.right.isDown)
         {
-          this.player.body.setVelocityX(160);
+            this.player.body.setVelocityX(160);
         }
 
         // Vertical movement
         if (this.cursors.up.isDown)
         {
-          this.player.body.setVelocityY(-160);
+            this.player.body.setVelocityY(-160);
         }
         else if (this.cursors.down.isDown)
         {
-          this.player.body.setVelocityY(160);
+            this.player.body.setVelocityY(160);
         }
 
         // Update the animation last and give left/right animations
         // precedence over up/down animations
         if (this.cursors.left.isDown)
         {
-          this.player.anims.play('left', true);
-          this.player.flipX = false;
+            this.player.anims.play('left', true);
+            this.player.flipX = false;
         }
         else if (this.cursors.right.isDown)
         {
-          this.player.anims.play('right', true);
-          this.player.flipX = false;
+            this.player.anims.play('right', true);
+            this.player.flipX = false;
         }
         else if (this.cursors.up.isDown)
         {
-          this.player.anims.play('up', true);
+            this.player.anims.play('up', true);
         }
         else if (this.cursors.down.isDown)
         {
-          this.player.anims.play('down', true);
+            this.player.anims.play('down', true);
         }
         else
         {
-          this.player.anims.stop();
+            this.player.anims.stop();
         }
     },
 });
 
 // exporting variable, this way it is accessed out of this file
-export default BlocoAScene;
+export default BlocoBScene;
 
 // -------------------------------------------------
 // -------------------------------------------------

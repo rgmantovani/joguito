@@ -4,7 +4,9 @@
 import BootScene from './scenes/BootScene.js'
 import WorldScene from './scenes/WorldScene.js'
 import BlocoAScene from './scenes/BlocoAScene.js'
-// import ThirdScene from './scenes/ThirdScene.js'
+import BlocoBScene from './scenes/BlocoBScene.js'
+import BlocoCScene from './scenes/BlocoCScene.js'
+import BlocoDScene from './scenes/BlocoDScene.js'
 
 // -------------------------------------------------
 // -------------------------------------------------
@@ -12,7 +14,7 @@ import BlocoAScene from './scenes/BlocoAScene.js'
 var config = {
   type: Phaser.AUTO,
   parent: 'content',
-  width: 640,
+  width:  640,
   height: 480,
   zoom: 1,
   pixelArt: true,
@@ -27,7 +29,10 @@ var config = {
   scene: [
     BootScene,      // just load the asses and call the main scene
     WorldScene,     // the main scene, exploring the map
-    BlocoAScene,    // a second scene to make a transition
+    BlocoAScene,    // 
+    BlocoBScene,    //  
+    BlocoCScene,    //  
+    BlocoDScene,    //  
   ]
 };
 var game = new Phaser.Game(config);

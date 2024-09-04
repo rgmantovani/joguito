@@ -87,7 +87,7 @@ var WorldScene = new Phaser.Class({
     //-------------------------------
 
     // our player sprite created through the phycis system
-    this.player = this.physics.add.sprite(50, 100, 'player', 0);
+    this.player = this.physics.add.sprite(480, 550, 'player', 0);
 
     // don't go out of the map
     this.physics.world.bounds.width = map.widthInPixels;
@@ -98,13 +98,19 @@ var WorldScene = new Phaser.Class({
     this.physics.add.collider(this.player, obstaclesMainMap);
 
     //-------------------------------
-    // Adding the main char
+    // Adding doors
     //-------------------------------
 
-    // Adding door
-    this.door = this.physics.add.sprite(240, 205, '', 0);
-    this.door.setImmovable();
-
+    // TODO: rename blocks
+    this.doorA = this.physics.add.sprite(240, 205, '', 0);
+    this.doorA.setImmovable();
+    this.doorB = this.physics.add.sprite(688, 205, '', 0);
+    this.doorB.setImmovable();
+    this.doorC = this.physics.add.sprite(240, 490, '', 0);
+    this.doorC.setImmovable();
+    this.doorD = this.physics.add.sprite(688, 490, '', 0);
+    this.doorD.setImmovable();
+    
     //-------------------------------
     // Adding some NPCs
     //-------------------------------
@@ -146,19 +152,40 @@ var WorldScene = new Phaser.Class({
     // changing Scenes
     //-------------------------------
 
-    // this door makes the game go to a scene 2
-    this.physics.add.overlap(this.player, this.door, this.callBlocoASecene, false, this);
-    // this door makes the game go to a scene 3
-    // this.physics.add.overlap(this.player, this.door2, this.callThirdScene, false, this);
+    this.physics.add.overlap(this.player, this.doorA, this.callBlocoAScene, false, this);
+    this.physics.add.overlap(this.player, this.doorB, this.callBlocoBScene, false, this);
+    this.physics.add.overlap(this.player, this.doorC, this.callBlocoCScene, false, this);
+    this.physics.add.overlap(this.player, this.doorD, this.callBlocoDScene, false, this);
+ 
   },
 
   // TODO: there must be some way to pass parameters/objects to generalize
   // these functions
-  callBlocoASecene: function() {
+  callBlocoAScene: function() {
     if(this.cursors.space.isDown) {
       console.log(' - Starting the BlocoA Scene');
-      // this.music.stop("backgroundSong");
         this.scene.switch('BlocoAScene');
+    }
+  },
+
+  callBlocoBScene: function() {
+    if(this.cursors.space.isDown) {
+      console.log(' - Starting the BlocoB Scene');
+        this.scene.switch('BlocoBScene');
+    }
+  },
+
+  callBlocoCScene: function() {
+    if(this.cursors.space.isDown) {
+      console.log(' - Starting the BlocoC Scene');
+        this.scene.switch('BlocoCScene');
+    }
+  },
+
+  callBlocoDScene: function() {
+    if(this.cursors.space.isDown) {
+      console.log(' - Starting the BlocoD Scene');
+        this.scene.switch('BlocoDScene');
     }
   },
 

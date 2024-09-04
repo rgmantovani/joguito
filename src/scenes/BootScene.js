@@ -21,6 +21,9 @@ var BootScene = new Phaser.Class({
     // map(s) in json format
     this.load.tilemapTiledJSON('utfmap', 'assets/map/utfmap.json');
     this.load.tilemapTiledJSON('blocoA', 'assets/map/blocoA.json');
+    this.load.tilemapTiledJSON('blocoB', 'assets/map/blocoA.json');
+    this.load.tilemapTiledJSON('blocoC', 'assets/map/blocoA.json');
+    this.load.tilemapTiledJSON('blocoD', 'assets/map/blocoA.json');
    
     // our two characters
     this.load.spritesheet('player', 'assets/student.png', {frameWidth:32, frameHeight:32});
