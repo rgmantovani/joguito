@@ -102,12 +102,12 @@ var WorldScene = new Phaser.Class({
     //-------------------------------
 
     // TODO: rename blocks
-    this.doorA = this.physics.add.sprite(240, 205, '', 0);
-    this.doorA.setImmovable();
-    this.doorB = this.physics.add.sprite(688, 205, '', 0);
+    this.doorB = this.physics.add.sprite(240, 205, '', 0);
     this.doorB.setImmovable();
-    this.doorC = this.physics.add.sprite(240, 490, '', 0);
+    this.doorC = this.physics.add.sprite(688, 205, '', 0);
     this.doorC.setImmovable();
+    this.doorA = this.physics.add.sprite(240, 490, '', 0);
+    this.doorA.setImmovable();
     this.doorD = this.physics.add.sprite(688, 490, '', 0);
     this.doorD.setImmovable();
     
