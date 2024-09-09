@@ -23,30 +23,37 @@ var WorldScene = new Phaser.Class({
     var map = this.make.tilemap({ key: 'utfmap' });
 
     // first parameter is the name of the tilemap in tiled
-    var tiles = map.addTilesetImage('reduced', 'reduced');
-
+    var tiles1 = map.addTilesetImage('poke1');
+    var tiles2 = map.addTilesetImage('poke2');
+    var tiles4 = map.addTilesetImage('poke4');
+    var tiles5 = map.addTilesetImage('poke5');
+    var tiles8 = map.addTilesetImage('poke8');
+    
     // creating the layers
-    var grassMainMap = map.createLayer('Grass', tiles, 0, 0);
-    var obstaclesMainMap = map.createLayer('Buildings', tiles, 0, 0);
-
+    var grass     = map.createLayer('Grass', tiles2, 0, 0);
+    var objects   = map.createLayer('Objects', tiles5, 0, 0);
+    var fences    = map.createLayer('Fences', tiles5, 0, 0);
+    var paths     = map.createLayer('Paths', tiles4, 0, 0);
+    var paths2    = map.createLayer('Paths2', tiles4, 0, 0);
+    var trees     = map.createLayer('Trees', tiles1, 0, 0);
+    var buildings = map.createLayer('Buildings', tiles8, 0, 0);
+   
     // make all tiles in obstacles collidable
-    obstaclesMainMap.setCollisionByExclusion([-1]);
+    buildings.setCollisionByExclusion([-1]);
+    fences.setCollisionByExclusion([-1]);
+    trees.setCollisionByExclusion([-1]);
+    objects.setCollisionByExclusion([-1]);
 
     // -------------------------------
     // adding background music
     // -------------------------------
     this.music = this.sound.add('backgroundSong');
-    var musicConfig = {
-      mute: false,
-      volume: 1,
-      rate: 1,
-      detune: 0,
-      seek:0,
-      loop: true,
-      delay: 0
+    var musicConfig = { 
+      mute: false, volume: 1, rate: 1, detune: 0,
+      seek:0, loop: true, delay: 0
     }
     // start playing music
-    this.music.play(musicConfig); 
+    // this.music.play(musicConfig); 
 
     // -------------------------------
     // -------------------------------
@@ -87,7 +94,7 @@ var WorldScene = new Phaser.Class({
     //-------------------------------
 
     // our player sprite created through the phycis system
-    this.player = this.physics.add.sprite(480, 550, 'player', 0);
+    this.player = this.physics.add.sprite(500, 500, 'player', 0);
 
     // don't go out of the map
     this.physics.world.bounds.width = map.widthInPixels;
@@ -95,21 +102,24 @@ var WorldScene = new Phaser.Class({
     this.player.setCollideWorldBounds(true);
 
     // don't walk on obstacles
-    this.physics.add.collider(this.player, obstaclesMainMap);
-
+    this.physics.add.collider(this.player, buildings);
+    this.physics.add.collider(this.player, fences);
+    this.physics.add.collider(this.player, trees);
+    this.physics.add.collider(this.player, objects);
+     
     //-------------------------------
     // Adding doors
     //-------------------------------
 
     // TODO: rename blocks
-    this.doorB = this.physics.add.sprite(240, 205, '', 0);
-    this.doorB.setImmovable();
-    this.doorC = this.physics.add.sprite(688, 205, '', 0);
-    this.doorC.setImmovable();
-    this.doorA = this.physics.add.sprite(240, 490, '', 0);
-    this.doorA.setImmovable();
-    this.doorD = this.physics.add.sprite(688, 490, '', 0);
-    this.doorD.setImmovable();
+    // this.doorB = this.physics.add.sprite(240, 205, '', 0);
+    // this.doorB.setImmovable();
+    // this.doorC = this.physics.add.sprite(688, 205, '', 0);
+    // this.doorC.setImmovable();
+    // this.doorA = this.physics.add.sprite(240, 490, '', 0);
+    // this.doorA.setImmovable();
+    // this.doorD = this.physics.add.sprite(688, 490, '', 0);
+    // this.doorD.setImmovable();
     
     //-------------------------------
     // Adding some NPCs
@@ -146,16 +156,17 @@ var WorldScene = new Phaser.Class({
     //-------------------------------
     // Controlling player with the keyboard
     //-------------------------------
+
     this.cursors = this.input.keyboard.createCursorKeys();
 
     //-------------------------------
     // changing Scenes
     //-------------------------------
 
-    this.physics.add.overlap(this.player, this.doorA, this.callBlocoAScene, false, this);
-    this.physics.add.overlap(this.player, this.doorB, this.callBlocoBScene, false, this);
-    this.physics.add.overlap(this.player, this.doorC, this.callBlocoCScene, false, this);
-    this.physics.add.overlap(this.player, this.doorD, this.callBlocoDScene, false, this);
+    // this.physics.add.overlap(this.player, this.doorA, this.callBlocoAScene, false, this);
+    // this.physics.add.overlap(this.player, this.doorB, this.callBlocoBScene, false, this);
+    // this.physics.add.overlap(this.player, this.doorC, this.callBlocoCScene, false, this);
+    // this.physics.add.overlap(this.player, this.doorD, this.callBlocoDScene, false, this);
  
   },
 

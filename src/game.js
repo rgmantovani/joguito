@@ -19,7 +19,7 @@ var config = {
   zoom: 1,
   pixelArt: true,
   physics: {
-    default: 'arcade',
+    default: 'arcade', 
     arcade: {
       gravity: { y: 0 },
       debug: false // set to true to view zones
