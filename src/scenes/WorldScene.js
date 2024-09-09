@@ -31,11 +31,12 @@ var WorldScene = new Phaser.Class({
     
     // creating the layers
     var grass     = map.createLayer('Grass', tiles2, 0, 0);
-    var objects   = map.createLayer('Objects', tiles5, 0, 0);
     var fences    = map.createLayer('Fences', tiles5, 0, 0);
     var paths     = map.createLayer('Paths', tiles4, 0, 0);
     var paths2    = map.createLayer('Paths2', tiles4, 0, 0);
     var trees     = map.createLayer('Trees', tiles1, 0, 0);
+    var trees2    = map.createLayer('Trees2', tiles1, 0, 0);
+    var objects   = map.createLayer('Objects', tiles5, 0, 0);
     var buildings = map.createLayer('Buildings', tiles8, 0, 0);
    
     // make all tiles in obstacles collidable
@@ -94,7 +95,7 @@ var WorldScene = new Phaser.Class({
     //-------------------------------
 
     // our player sprite created through the phycis system
-    this.player = this.physics.add.sprite(500, 500, 'player', 0);
+    this.player = this.physics.add.sprite(520, 880, 'player', 0);
 
     // don't go out of the map
     this.physics.world.bounds.width = map.widthInPixels;
@@ -111,16 +112,19 @@ var WorldScene = new Phaser.Class({
     // Adding doors
     //-------------------------------
 
-    // TODO: rename blocks
-    // this.doorB = this.physics.add.sprite(240, 205, '', 0);
-    // this.doorB.setImmovable();
-    // this.doorC = this.physics.add.sprite(688, 205, '', 0);
-    // this.doorC.setImmovable();
-    // this.doorA = this.physics.add.sprite(240, 490, '', 0);
-    // this.doorA.setImmovable();
-    // this.doorD = this.physics.add.sprite(688, 490, '', 0);
-    // this.doorD.setImmovable();
+    this.doorA = this.physics.add.sprite(363, 855, '', 0);
+    this.doorA.setImmovable();
     
+    this.doorB = this.physics.add.sprite(363, 550, '', 0);
+    this.doorB.setImmovable();
+    
+    this.doorC = this.physics.add.sprite(675, 530, '', 0);
+    this.doorC.setImmovable();
+
+    this.doorD = this.physics.add.sprite(675, 845, '', 0);
+    this.doorD.setImmovable();
+
+
     //-------------------------------
     // Adding some NPCs
     //-------------------------------
@@ -136,9 +140,9 @@ var WorldScene = new Phaser.Class({
     // where the NPCs will be placed
     // setImmovable prevents the npc to be pushed
     // TODO: use array to control NPCs of the same type
-    this.npc1 = this.physics.add.sprite(100, 100, 'npcs', 0).setImmovable();
-    this.npc2 = this.physics.add.sprite(330, 200, 'npcs', 0).setImmovable();
-    this.npc3 = this.physics.add.sprite(180, 300, 'npcs', 0).setImmovable();
+    this.npc1 = this.physics.add.sprite(500, 550, 'npcs', 0).setImmovable();
+    this.npc2 = this.physics.add.sprite(330, 850, 'npcs', 0).setImmovable();
+    this.npc3 = this.physics.add.sprite(700, 850, 'npcs', 0).setImmovable();
 
     // dont walk on npcs
     this.physics.add.collider(this.player, this.npc1);
@@ -163,7 +167,7 @@ var WorldScene = new Phaser.Class({
     // changing Scenes
     //-------------------------------
 
-    // this.physics.add.overlap(this.player, this.doorA, this.callBlocoAScene, false, this);
+    this.physics.add.overlap(this.player, this.doorA, this.callBlocoAScene, false, this);
     // this.physics.add.overlap(this.player, this.doorB, this.callBlocoBScene, false, this);
     // this.physics.add.overlap(this.player, this.doorC, this.callBlocoCScene, false, this);
     // this.physics.add.overlap(this.player, this.doorD, this.callBlocoDScene, false, this);
