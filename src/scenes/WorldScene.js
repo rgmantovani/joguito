@@ -96,7 +96,9 @@ var WorldScene = new Phaser.Class({
 
     // our player sprite created through the phycis system
     this.player = this.physics.add.sprite(520, 880, 'player', 0);
-
+    this.player.setSize(2, 2);
+    this.player.setOffset(15, 15);
+    
     // don't go out of the map
     this.physics.world.bounds.width = map.widthInPixels;
     this.physics.world.bounds.height = map.heightInPixels;
