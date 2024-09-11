@@ -16,7 +16,6 @@ var BootScene = new Phaser.Class({
     console.log(' - BootScene: loading assets');
 
     // map tiles
-    // this.load.image('poke32', 'assets/maps/pokemon_tileset_from_public_tiles_32x32_by_chaoticcherrycake_dab2byf.png');
     this.load.image('poke1', 'assets/maps/poke1.png');
     this.load.image('poke2', 'assets/maps/poke2.png');
     this.load.image('poke4', 'assets/maps/poke4.png');

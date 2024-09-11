@@ -37,10 +37,8 @@ var BlocoAScene = new Phaser.Class({
       //-------------------------------
 
       // this door makes the game go to a main scene
-        this.doorMain = this.physics.add.sprite(242, 440, '', 0);
-        this.doorMain.setImmovable();
-
-      //   this.door.setImmovable();
+      this.doorMain = this.physics.add.sprite(242, 440, '', 0);
+      this.doorMain.setImmovable();
 
       //-------------------------------
       // Adding the main char

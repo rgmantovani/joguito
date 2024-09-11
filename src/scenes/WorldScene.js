@@ -117,13 +117,13 @@ var WorldScene = new Phaser.Class({
     this.doorA = this.physics.add.sprite(363, 855, '', 0);
     this.doorA.setImmovable();
     
-    this.doorB = this.physics.add.sprite(363, 550, '', 0);
+    this.doorB = this.physics.add.sprite(363, 565, '', 0);
     this.doorB.setImmovable();
     
     this.doorC = this.physics.add.sprite(675, 530, '', 0);
     this.doorC.setImmovable();
 
-    this.doorD = this.physics.add.sprite(675, 845, '', 0);
+    this.doorD = this.physics.add.sprite(675, 855, '', 0);
     this.doorD.setImmovable();
 
 
@@ -170,9 +170,9 @@ var WorldScene = new Phaser.Class({
     //-------------------------------
 
     this.physics.add.overlap(this.player, this.doorA, this.callBlocoAScene, false, this);
-    // this.physics.add.overlap(this.player, this.doorB, this.callBlocoBScene, false, this);
-    // this.physics.add.overlap(this.player, this.doorC, this.callBlocoCScene, false, this);
-    // this.physics.add.overlap(this.player, this.doorD, this.callBlocoDScene, false, this);
+    this.physics.add.overlap(this.player, this.doorB, this.callBlocoBScene, false, this);
+    this.physics.add.overlap(this.player, this.doorC, this.callBlocoCScene, false, this);
+    this.physics.add.overlap(this.player, this.doorD, this.callBlocoDScene, false, this);
  
   },
 

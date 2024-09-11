@@ -24,19 +24,20 @@ var BlocoDScene = new Phaser.Class({
       var map = this.make.tilemap({ key: 'blocoD' });
 
       // first parameter is the name of the tilemap in tiled
-      var tiles = map.addTilesetImage('reduced', 'reduced');
+      var tiles2 = map.addTilesetImage('poke2');
+      var tiles4 = map.addTilesetImage('poke4');
 
       // creating the layers
-      var floorD  = map.createLayer('Floor', tiles, 0, 0);
-      var wallsD  = map.createLayer('Walls', tiles, 0, 0);
-      var doorsD  = map.createLayer('Doors', tiles, 0, 0);
+      var floorD  = map.createLayer('Floor', tiles2, 0, 0);
+      var wallsD  = map.createLayer('Walls', tiles4, 0, 0);
+      var doorsD  = map.createLayer('Doors', tiles4, 0, 0);
 
       //-------------------------------
       // Adding a door to a new scene
       //-------------------------------
 
       // this door makes the game go to a main scene
-        this.doorMain = this.physics.add.sprite(470, 650, '', 0);
+        this.doorMain = this.physics.add.sprite(340, 600, '', 0);
         this.doorMain.setImmovable();
 
       //-------------------------------
@@ -44,7 +45,7 @@ var BlocoDScene = new Phaser.Class({
       //-------------------------------
 
       // our player sprite created through the phycis system
-      this.player = this.physics.add.sprite(470, 650, 'player', 0);
+      this.player = this.physics.add.sprite(340, 600, 'player', 0);
 
       // don't go out of the map
       this.physics.world.bounds.width  = map.widthInPixels;
