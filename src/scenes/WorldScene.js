@@ -58,7 +58,6 @@ var WorldScene = new Phaser.Class({
 
     // -------------------------------
     // -------------------------------
-
    
     //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
     this.anims.create({
@@ -125,7 +124,6 @@ var WorldScene = new Phaser.Class({
 
     this.doorD = this.physics.add.sprite(675, 855, '', 0);
     this.doorD.setImmovable();
-
 
     //-------------------------------
     // Adding some NPCs
