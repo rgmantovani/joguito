@@ -32,7 +32,6 @@ var BlocoAScene = new Phaser.Class({
       var tiles2 = map.addTilesetImage('poke2');
       var tiles4 = map.addTilesetImage('poke4');
 
-
       // creating the layers
       var floorsA = map.createLayer('Floor', tiles2, 0, 0);
       var wallsA  = map.createLayer('Walls', tiles4, 0, 0);
@@ -50,7 +49,7 @@ var BlocoAScene = new Phaser.Class({
       // Adding the main char
       //-------------------------------
 
-      // our player sprite created through the phycis system
+      // our player sprite created through the physics system
       this.player = new Player(this, 242, 440, 'player', 0);
       this.physics.add.existing(this.player, false)
     

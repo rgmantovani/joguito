@@ -26,7 +26,6 @@ var BlocoBScene = new Phaser.Class({
     {
 
       // create the map
-      // TODO: change here
       var map = this.make.tilemap({ key: 'blocoB' });
 
       // first parameter is the name of the tilemap in tiled
@@ -50,7 +49,7 @@ var BlocoBScene = new Phaser.Class({
       // Adding the main char
       //-------------------------------
 
-      // our player sprite created through the phycis system
+      // our player sprite created through the physics system
       this.player = new Player(this, 242, 440, 'player', 0);
       this.physics.add.existing(this.player, false)
     

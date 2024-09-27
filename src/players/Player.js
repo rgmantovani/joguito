@@ -1,19 +1,28 @@
+// -------------------------------------------------
+// Player: Main player class
+// -------------------------------------------------
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
    
+    // constructor
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
+       
+        // TODO: enable these methods again
         // this.setSize(2, 2);
         // this.setOffset(15, 15);
+       
         this.name = "main char"
-        this.createAnims()
-        //this.enableBody()
+
+        // create player's animations
+        this.createAnimations()
         
         // collected itens (?)
         // this.hasBag = false
     }
 
-    createAnims() {
+    // create Plauer animations
+    createAnimations() {
         //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
         this.anims.create({
             key: 'left',

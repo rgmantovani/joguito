@@ -65,7 +65,10 @@ var WorldScene = new Phaser.Class({
     // Adding the main char
     //-------------------------------
 
-    // our player sprite created through the phycis system
+    // Controlling player with the keyboard
+    this.cursors = this.input.keyboard.createCursorKeys();
+
+    // our player sprite created through the physics system
     this.player = new Player(this, 520, 880, 'player', 0);
     this.physics.add.existing(this.player, false)
     
@@ -129,12 +132,6 @@ var WorldScene = new Phaser.Class({
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.roundPixels = true; // avoid tile bleed
-
-    //-------------------------------
-    // Controlling player with the keyboard
-    //-------------------------------
-
-    this.cursors = this.input.keyboard.createCursorKeys();
 
     //-------------------------------
     // changing Scenes

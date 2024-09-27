@@ -26,7 +26,6 @@ var BlocoCScene = new Phaser.Class({
     {
 
       // create the map
-      // TODO: change here
       var map = this.make.tilemap({ key: 'blocoC' });
 
       // first parameter is the name of the tilemap in tiled
@@ -43,14 +42,14 @@ var BlocoCScene = new Phaser.Class({
       //-------------------------------
 
       // this door makes the game go to a main scene
-        this.doorMain = this.physics.add.sprite(20, 495, '', 0);
-        this.doorMain.setImmovable();
+      this.doorMain = this.physics.add.sprite(20, 495, '', 0);
+      this.doorMain.setImmovable();
 
       //-------------------------------
       // Adding the main char
       //-------------------------------
 
-      // our player sprite created through the phycis system
+      //our player sprite created through the physics system
       this.player = new Player(this, 20, 495, 'player', 0);
       this.physics.add.existing(this.player, false)
 
