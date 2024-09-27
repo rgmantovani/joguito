@@ -2,6 +2,11 @@
 // BlocoB Scene
 // -------------------------------------------------
 
+import Player from '../players/Player.js'
+
+// -------------------------------------------------
+// -------------------------------------------------
+
 var BlocoBScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
@@ -46,8 +51,9 @@ var BlocoBScene = new Phaser.Class({
       //-------------------------------
 
       // our player sprite created through the phycis system
-      this.player = this.physics.add.sprite(242, 440, 'player', 0);
-     
+      this.player = new Player(this, 242, 440, 'player', 0);
+      this.physics.add.existing(this.player, false)
+    
       // don't go out of the map
       this.physics.world.bounds.width  = map.widthInPixels;
       this.physics.world.bounds.height = map.heightInPixels;
@@ -56,6 +62,7 @@ var BlocoBScene = new Phaser.Class({
       // don't walk on walls
       wallsB.setCollisionByExclusion([-1]);
       this.physics.add.collider(this.player, wallsB);
+      this.add.existing(this.player)
 
       //-------------------------------
       // Limit camera to map
@@ -111,59 +118,9 @@ var BlocoBScene = new Phaser.Class({
       }
     },
 
-    update: function (time, delta)
-    {
+    update: function (time, delta) {
       this.player.body.setVelocity(0);
-      this.updatePlayer();
-    },
-
-    // this function updates the player's position
-    updatePlayer: function()
-    {
-        // Horizontal movement
-        if (this.cursors.left.isDown)
-        {
-            this.player.body.setVelocityX(-160);
-        }
-        else if (this.cursors.right.isDown)
-        {
-            this.player.body.setVelocityX(160);
-        }
-
-        // Vertical movement
-        if (this.cursors.up.isDown)
-        {
-            this.player.body.setVelocityY(-160);
-        }
-        else if (this.cursors.down.isDown)
-        {
-            this.player.body.setVelocityY(160);
-        }
-
-        // Update the animation last and give left/right animations
-        // precedence over up/down animations
-        if (this.cursors.left.isDown)
-        {
-            this.player.anims.play('left', true);
-            this.player.flipX = false;
-        }
-        else if (this.cursors.right.isDown)
-        {
-            this.player.anims.play('right', true);
-            this.player.flipX = false;
-        }
-        else if (this.cursors.up.isDown)
-        {
-            this.player.anims.play('up', true);
-        }
-        else if (this.cursors.down.isDown)
-        {
-            this.player.anims.play('down', true);
-        }
-        else
-        {
-            this.player.anims.stop();
-        }
+      this.player.updatePlayer(this.cursors);
     },
 });
 
