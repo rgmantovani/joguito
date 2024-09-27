@@ -9,6 +9,7 @@ var BlocoDScene = new Phaser.Class({
     initialize: function BlocoDScene ()
     {
         Phaser.Scene.call(this, { key: 'BlocoDScene' });
+        this.sceneName = "Bloco D";
     },
 
     preload: function ()
@@ -82,7 +83,7 @@ var BlocoDScene = new Phaser.Class({
       //-------------------------------
       // show the current scene name
 
-      this.text = this.add.text(500, 560, "Bloco D", { fontFamily: 'Arial', fontSize: 20, color: '#00ff00' });
+      this.text = this.add.text(500, 560, this.sceneName, { fontFamily: 'Arial', fontSize: 20, color: '#00ff00' });
       this.timedEvent = this.time.delayedCall(4000, this.fadeSceneName, [], this);
     
     },
