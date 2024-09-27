@@ -77,6 +77,30 @@ var BlocoBScene = new Phaser.Class({
       //-------------------------------
       this.physics.add.overlap(this.player, this.doorMain, this.callWorldScene, false, this);
 
+      //-------------------------------
+      // Debug configurations   
+      //-------------------------------
+      // show the current scene name
+
+      this.text = this.add.text(342, 400, "Bloco B", { fontFamily: 'Arial', fontSize: 20, color: '#000000' });
+      this.timedEvent = this.time.delayedCall(4000, this.fadeSceneName, [], this);
+
+    },
+
+    // ---------------------
+    // Scene methods
+    // ---------------------
+
+    fadeSceneName: function() {
+        console.log("fading scene name")
+        this.tweens.add({
+            targets: this.text,
+            alpha: { from: 1, to: 0 },
+            ease: 'Linear',
+            duration: 500,
+            repeat: 0,
+            yoyo: false
+        });
     },
 
     callWorldScene: function() {
