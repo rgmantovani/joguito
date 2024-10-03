@@ -1,5 +1,5 @@
 // -------------------------------------------------
-// BlocoA Scene
+// BlocoB Scene
 // -------------------------------------------------
 
 import Player from '../players/Player.js'
@@ -7,14 +7,14 @@ import Player from '../players/Player.js'
 // -------------------------------------------------
 // -------------------------------------------------
 
-var BlocoAScene = new Phaser.Class({
+var BlocoBScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
-    initialize: function SecondScene ()
+    initialize: function BlocoBScene ()
     {
-        Phaser.Scene.call(this, { key: 'BlocoAScene' });
-        this.sceneName = "Bloco A";
+        Phaser.Scene.call(this, { key: 'BlocoBScene' });
+        this.sceneName = "Bloco B";
     },
 
     preload: function ()
@@ -26,24 +26,24 @@ var BlocoAScene = new Phaser.Class({
     {
 
       // create the map
-      var map = this.make.tilemap({ key: 'blocoA' });
+      var map = this.make.tilemap({ key: 'blocoB' });
 
       // first parameter is the name of the tilemap in tiled
       var tiles2 = map.addTilesetImage('poke2');
       var tiles4 = map.addTilesetImage('poke4');
 
       // creating the layers
-      var floorsA = map.createLayer('Floor', tiles2, 0, 0);
-      var wallsA  = map.createLayer('Walls', tiles4, 0, 0);
-      var doorsA  = map.createLayer('Doors', tiles4, 0, 0);
+      var floorB  = map.createLayer('Floor', tiles2, 0, 0);
+      var wallsB  = map.createLayer('Walls', tiles4, 0, 0);
+      var doorsB  = map.createLayer('Doors', tiles4, 0, 0);
 
       //-------------------------------
       // Adding a door to a new scene
       //-------------------------------
 
       // this door makes the game go to a main scene
-      this.doorMain = this.physics.add.sprite(242, 440, '', 0);
-      this.doorMain.setImmovable();
+        this.doorMain = this.physics.add.sprite(242, 430, '', 0);
+        this.doorMain.setImmovable();
 
       //-------------------------------
       // Adding the main char
@@ -59,8 +59,8 @@ var BlocoAScene = new Phaser.Class({
       this.player.setCollideWorldBounds(true);
 
       // don't walk on walls
-      wallsA.setCollisionByExclusion([-1]);
-      this.physics.add.collider(this.player, wallsA);
+      wallsB.setCollisionByExclusion([-1]);
+      this.physics.add.collider(this.player, wallsB);
       this.add.existing(this.player)
 
       //-------------------------------
@@ -99,15 +99,15 @@ var BlocoAScene = new Phaser.Class({
     // ---------------------
 
     fadeSceneName: function() {
-      console.log("fading scene name")
-      this.tweens.add({
-          targets: this.text,
-          alpha: { from: 1, to: 0 },
-          ease: 'Linear',
-          duration: 500,
-          repeat: 0,
-          yoyo: false
-      });
+        console.log("fading scene name")
+        this.tweens.add({
+            targets: this.text,
+            alpha: { from: 1, to: 0 },
+            ease: 'Linear',
+            duration: 500,
+            repeat: 0,
+            yoyo: false
+        });
     },
 
     callWorldScene: function() {
@@ -121,11 +121,10 @@ var BlocoAScene = new Phaser.Class({
       this.player.body.setVelocity(0);
       this.player.updatePlayer(this.cursors);
     },
-
 });
 
 // exporting variable, this way it is accessed out of this file
-export default BlocoAScene;
+export default BlocoBScene;
 
 // -------------------------------------------------
 // -------------------------------------------------
